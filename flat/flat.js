@@ -27,8 +27,9 @@
 
 // 5 使用扩展运算符
 let arr = [1, [2, 3], [4, 5, [6, 7, 8, 9]]]
-while (arr.some(Array.isArray)) {
-    arr = [].concat(...arr)
+function fn2(arr) {
+    while (arr.some(Array.isArray)) {
+        arr = [].concat(...arr)
+    }
+    console.log(111, arr)
 }
-
-console.log(111, arr)

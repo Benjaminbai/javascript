@@ -24,21 +24,20 @@ const MyPromise = (function () {
                 that.rejectFnStack.forEach(item => (item(that.value)))
             }
         }
-
-        F.prototype.then = function (resolvedFN) {
-            if (typeof resolvedFN === 'function') {
-                if (this.state === RESOLVED) resolvedFN(this.value)
-                else this.resolveFnStack.push(resolvedFN)
-            }
-            return this
-        }
-        F.prototype.catch = function (rejectedFN) {
-            if (typeof rejectedFN === 'function') {
-                if (this.state === REJECTED) rejectedFN(this.value)
-                else this.rejectFnStack.push(rejectedFN)
-            }
-            return this
-        }
-        return F
     }
+    F.prototype.then = function (resolvedFN) {
+        if (typeof resolvedFN === 'function') {
+            if (this.state === RESOLVED) resolvedFN(this.value)
+            else this.resolveFnStack.push(resolvedFN)
+        }
+        return this
+    }
+    F.prototype.catch = function (rejectedFN) {
+        if (typeof rejectedFN === 'function') {
+            if (this.state === REJECTED) rejectedFN(this.value)
+            else this.rejectFnStack.push(rejectedFN)
+        }
+        return this
+    }
+    return F
 })()
