@@ -1,5 +1,6 @@
 var str = "let's take leetcode contest"
-var middle = str.split("")
-var result = middle.map((item) => {
-    return item.split("").reverse().join("")
-})
+var reverseWords = function (s) {
+    return s.split(" ").filter(item => item).reverse().join(" ");
+};
+var result = reverseWords(str)
+console.log(result)
