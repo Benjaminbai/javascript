@@ -1,8 +1,7 @@
-
-const MyPromise = (function () {
-    const PENDING = 'pending'
-    const RESOLVED = 'resolved'
-    const REJECTED = 'rejected'
+const myPromise = (function () {
+    const PENDING = "pending"
+    const RESOLVED = "resolved"
+    const REJECTED = "rejected"
 
     function F(fn) {
         const that = this
@@ -10,7 +9,7 @@ const MyPromise = (function () {
         this.value = null
         this.resolvedFnStack = []
         this.rejectedFnStack = []
-        typeof fn === 'function' && fn(resolve, reject)
+        typeof fn === "function" && fn(resolve, reject)
         function resolve(v) {
             if (that.state === PENDING) {
                 that.value = v
@@ -26,19 +25,27 @@ const MyPromise = (function () {
             }
         }
     }
+
     F.prototype.then = function (resolvedFn) {
-        if (typeof resolvedFn === 'function') {
-            if (this.state === RESOLVED) resolvedFn(this.value)
-            else this.resolvedFnStack.push(resolvedFn)
+        if (typeof resolvedFn === "function") {
+            if (this.state === RESOLVED) {
+                resolvedFn(this.value)
+            } else {
+                this.resolvedFnStack.push(resolvedFn)
+            }
         }
         return this
     }
     F.prototype.catch = function (rejectedFn) {
-        if (typeof rejectedFn === 'function') {
-            if (this.state === REJECTED) rejectedFn(this.value)
-            else this.resolvedFnStack.push(rejectedFn)
+        if (typeof rejectedFn === "function") {
+            if (this.state === REJECTED) {
+                rejectedFn(this.value)
+            } else {
+                this.rejectedFnStack.push(rejectedFn)
+            }
         }
-        return this;
+        return this
     }
+
     return F
 })()
